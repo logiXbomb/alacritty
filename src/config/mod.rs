@@ -1637,7 +1637,7 @@ impl Config {
     ///
     /// 1. $XDG_CONFIG_HOME/alacritty/alacritty.yml
     /// 2. $XDG_CONFIG_HOME/alacritty.yml
-    /// 3. $HOME/.config/alacritty/alacritty.yml
+    /// 3. $HOME/dotfiles/alacritty/alacritty.yml
     /// 4. $HOME/.alacritty.yml
     #[cfg(not(windows))]
     pub fn installed_config<'a>() -> Option<Cow<'a, Path>> {
@@ -1652,8 +1652,8 @@ impl Config {
             })
             .or_else(|| {
                 if let Ok(home) = env::var("HOME") {
-                    // Fallback path: $HOME/.config/alacritty/alacritty.yml
-                    let fallback = PathBuf::from(&home).join(".config/alacritty/alacritty.yml");
+                    // Fallback path: $HOME/dotfiles/alacritty/alacritty.yml
+                    let fallback = PathBuf::from(&home).join("dotfiles/alacritty/alacritty.yml");
                     if fallback.exists() {
                         return Some(fallback);
                     }
